@@ -3,127 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Beneficios Docentes</title>
+    <title>Cálculo de Beneficio Docente</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 600px;
+            max-width: 500px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #f5f5f5;
         }
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #2c3e50;
-            text-align: center;
-        }
-        .form-group {
+        .input-group {
             margin-bottom: 15px;
         }
         label {
             display: block;
             margin-bottom: 5px;
-            font-weight: bold;
         }
         input {
             width: 100%;
             padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
             box-sizing: border-box;
         }
         button {
-            background-color: #3498db;
+            background-color: #4CAF50;
             color: white;
             border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
-            cursor: pointer;
+            padding: 10px;
             width: 100%;
-            font-size: 16px;
+            cursor: pointer;
         }
-        button:hover {
-            background-color: #2980b9;
-        }
-        #resultado {
+        #result {
             margin-top: 20px;
             padding: 15px;
-            background-color: #e8f4fc;
-            border-radius: 4px;
-            display: none;
+            background-color: #f0f0f0;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Calculadora de Beneficios Docentes</h1>
-        
-        <div class="form-group">
-            <label for="asignacion">Asignación de la clase:</label>
-            <input type="number" id="asignacion" placeholder="Ingrese el monto">
-        </div>
-        
-        <div class="form-group">
-            <label for="estado">Estado Docente:</label>
-            <input type="number" id="estado" placeholder="Ingrese el monto">
-        </div>
-        
-        <div class="form-group">
-            <label for="antiguedad">Antigüedad Docente (en años):</label>
-            <input type="number" id="antiguedad" placeholder="Ingrese los años">
-        </div>
-        
-        <button onclick="calcularPorcentaje()">Calcular Beneficio</button>
-        
-        <div id="resultado"></div>
+    <h1>Cálculo de Beneficio Docente</h1>
+    
+    <div class="input-group">
+        <label for="asignacion">Asignación de clase:</label>
+        <input type="number" id="asignacion" placeholder="Ingrese monto">
     </div>
+    
+    <div class="input-group">
+        <label for="estado">Estado docente:</label>
+        <input type="number" id="estado" placeholder="Ingrese monto">
+    </div>
+    
+    <div class="input-group">
+        <label for="antiguedad">Antigüedad docente (años):</label>
+        <input type="number" id="antiguedad" placeholder="Ingrese años">
+    </div>
+    
+    <button onclick="calcularBeneficio()">Calcular Beneficio</button>
+    
+    <div id="result"></div>
 
     <script>
-        function calcularPorcentaje() {
-            // Obtener los valores de las variables
-            const asignacion = parseFloat(document.getElementById('asignacion').value) || 0;
-            const estado = parseFloat(document.getElementById('estado').value) || 0;
-            const antiguedad = parseFloat(document.getElementById('antiguedad').value) || 0;
+        function calcularBeneficio() {
+            // Obtener valores
+            const asignacion = Number(document.getElementById('asignacion').value) || 0;
+            const estado = Number(document.getElementById('estado').value) || 0;
+            const antiguedad = Number(document.getElementById('antiguedad').value) || 0;
             
-            // Calcular la sumatoria
-            const sumatoria = asignacion + estado;
+            // Calcular sumatoria de las TRES variables
+            const sumatoria = asignacion + estado + antiguedad;
             
-            // Determinar el porcentaje según la antigüedad
-            let porcentaje = 0;
-            let textoAntiguedad = "";
-            
-            if (antiguedad > 10) {
+            // Determinar porcentaje según antigüedad
+            let porcentaje;
+            if (antiguedad >= 10) {
                 porcentaje = 60;
-                textoAntiguedad = "más de 10 años";
-            } else if (antiguedad > 6) {
+            } else if (antiguedad >= 6) {
                 porcentaje = 40;
-                textoAntiguedad = "más de 6 años";
-            } else if (antiguedad > 2) {
+            } else if (antiguedad >= 2) {
                 porcentaje = 20;
-                textoAntiguedad = "más de 2 años";
             } else {
                 porcentaje = 0;
-                textoAntiguedad = "2 años o menos";
             }
             
-            // Calcular el resultado
-            const resultado = sumatoria * (porcentaje / 100);
+            // Calcular beneficio
+            const beneficio = sumatoria * (porcentaje / 100);
             
-            // Mostrar el resultado
-            const resultadoElement = document.getElementById('resultado');
-            resultadoElement.innerHTML = `
+            // Mostrar resultado
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
                 <h3>Resultado:</h3>
-                <p><strong>Sumatoria (Asignación + Estado):</strong> $${sumatoria.toFixed(2)}</p>
-                <p><strong>Antigüedad:</strong> ${antiguedad} años (${textoAntiguedad})</p>
+                <p><strong>Sumatoria (Asignación + Estado + Antigüedad):</strong> ${sumatoria}</p>
+                <p><strong>Años de antigüedad:</strong> ${antiguedad}</p>
                 <p><strong>Porcentaje aplicado:</strong> ${porcentaje}%</p>
-                <p><strong>Beneficio calculado:</strong> $${resultado.toFixed(2)}</p>
+                <p><strong>Beneficio calculado:</strong> ${beneficio.toFixed(2)}</p>
             `;
-            resultadoElement.style.display = 'block';
         }
     </script>
 </body>

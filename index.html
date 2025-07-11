@@ -57,19 +57,6 @@
             border-radius: 4px;
             display: none;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
     </style>
 </head>
 <body>
@@ -94,28 +81,6 @@
         <button onclick="calcularPorcentaje()">Calcular Beneficio</button>
         
         <div id="resultado"></div>
-        
-        <h3>Escala de Porcentajes por Antigüedad</h3>
-        <table>
-            <tr>
-                <th>Años de Antigüedad</th>
-                <th>Porcentaje</th>
-            </tr>
-            <tr><td>1</td><td>15%</td></tr>
-            <tr><td>2 a 4</td><td>20%</td></tr>
-            <tr><td>5 a 6</td><td>35%</td></tr>
-            <tr><td>7 a 9</td><td>45%</td></tr>
-            <tr><td>10 a 11</td><td>60%</td></tr>
-            <tr><td>12 a 14</td><td>65%</td></tr>
-            <tr><td>15 a 16</td><td>70%</td></tr>
-            <tr><td>17 a 19</td><td>80%</td></tr>
-            <tr><td>20 a 21</td><td>100%</td></tr>
-            <tr><td>22 a 23</td><td>110%</td></tr>
-            <tr><td>24 a 25</td><td>120%</td></tr>
-            <tr><td>26 a 27</td><td>140%</td></tr>
-            <tr><td>28 a 29</td><td>150%</td></tr>
-            <tr><td>30 o más</td><td>160%</td></tr>
-        </table>
     </div>
 
     <script>
@@ -132,51 +97,18 @@
             let porcentaje = 0;
             let textoAntiguedad = "";
             
-            if (antiguedad >= 30) {
-                porcentaje = 160;
-                textoAntiguedad = "30 o más años";
-            } else if (antiguedad >= 28) {
-                porcentaje = 150;
-                textoAntiguedad = "28 a 29 años";
-            } else if (antiguedad >= 26) {
-                porcentaje = 140;
-                textoAntiguedad = "26 a 27 años";
-            } else if (antiguedad >= 24) {
-                porcentaje = 120;
-                textoAntiguedad = "24 a 25 años";
-            } else if (antiguedad >= 22) {
-                porcentaje = 110;
-                textoAntiguedad = "22 a 23 años";
-            } else if (antiguedad >= 20) {
-                porcentaje = 100;
-                textoAntiguedad = "20 a 21 años";
-            } else if (antiguedad >= 17) {
-                porcentaje = 80;
-                textoAntiguedad = "17 a 19 años";
-            } else if (antiguedad >= 15) {
-                porcentaje = 70;
-                textoAntiguedad = "15 a 16 años";
-            } else if (antiguedad >= 12) {
-                porcentaje = 65;
-                textoAntiguedad = "12 a 14 años";
-            } else if (antiguedad >= 10) {
+            if (antiguedad > 10) {
                 porcentaje = 60;
-                textoAntiguedad = "10 a 11 años";
-            } else if (antiguedad >= 7) {
-                porcentaje = 45;
-                textoAntiguedad = "7 a 9 años";
-            } else if (antiguedad >= 5) {
-                porcentaje = 35;
-                textoAntiguedad = "5 a 6 años";
-            } else if (antiguedad >= 2) {
+                textoAntiguedad = "más de 10 años";
+            } else if (antiguedad > 6) {
+                porcentaje = 40;
+                textoAntiguedad = "más de 6 años";
+            } else if (antiguedad > 2) {
                 porcentaje = 20;
-                textoAntiguedad = "2 a 4 años";
-            } else if (antiguedad === 1) {
-                porcentaje = 15;
-                textoAntiguedad = "1 año";
+                textoAntiguedad = "más de 2 años";
             } else {
                 porcentaje = 0;
-                textoAntiguedad = "0 años";
+                textoAntiguedad = "2 años o menos";
             }
             
             // Calcular el resultado
